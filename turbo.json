@@ -1,0 +1,29 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "prod": {
+      "cache": false,
+      "persistent": true
+    },
+    "build:dev": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "build:prod": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "lint": {
+      "dependsOn": ["^build"]
+    },
+    "start": {
+      "dependsOn": ["^build:prod"],
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

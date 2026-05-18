@@ -1,0 +1,39 @@
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.register-card {
+  width: 400px;
+  padding: 40px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.register-title {
+  margin-bottom: 32px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #363c57;
+  text-align: center;
+}
+
+.register-footer {
+  margin-top: 16px;
+  text-align: center;
+
+  span {
+    font-size: 13px;
+    color: #c6c6c6;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #667eea;
+    }
+  }
+}

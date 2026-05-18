@@ -1,0 +1,67 @@
+# 阿里oss配置
+alioss:
+  accessKeyId: '${ALIOSS_ACCESS_KEY_ID}'
+  accessKeySecret: '${ALIOSS_ACCESS_KEY_SECRET}'
+  regionId: 'oss-cn-hangzhou'
+  endpoint: 'sts-cn-hangzhou.aliyuncs.com'
+  bucket: 'dgtle'
+  roleArn: 'acs:ram::1033644835896772:role/ram-oss'
+
+# 数据库配置
+db:
+  mysql:
+    # 敏感数据通过环境变量配置
+    host: '${DB_MYSQL_HOST}'
+    username: '${DB_MYSQL_USERNAME}'
+    password: '${DB_MYSQL_PASSWORD}'
+    database: '${DB_MYSQL_DATABASE}'
+    port: ${DB_MYSQL_PORT}
+    charset: 'utf8mb4'
+    logger: 'advanced-console'
+    logging: true
+    multipleStatements: true
+    dropSchema: false
+    synchronize: false
+    supportBigNumbers: true
+    bigNumberStrings: true
+
+# redis配置 keyPrefix 当存在多个服务连接同一个redis实例时使用
+redis:
+  type: 'single'
+  options:
+    host: '${REDIS_HOST}'
+    port: ${REDIS_PORT}
+    db: ${REDIS_DB}
+    password: '${REDIS_PASSWORD}'
+    keyPrefix: ''
+
+# jwt 配置
+jwt:
+  secretkey: 'you_secretkey'
+  expiresin: '1h'
+  refreshExpiresIn: '2h'
+
+# github 配置
+github:
+  clientId: 'placeholder'
+  clientSecret: 'placeholder'
+  callbackURL: 'https://blog-service.xxyyun.cloud/api/auth/github/callback'
+
+# webhook 配置
+webhook:
+  siteUrl: 'https://blog.xxyyun.cloud'
+  revalidateSecret: '${WEBHOOK_REVALIDATE_SECRET}'
+
+# 接口白名单
+perm:
+  router:
+    whiteList:
+      [
+        { path: '/api/auth/captcha', method: 'GET' },
+        { path: '/api/auth/login', method: 'POST' },
+        { path: '/api/auth/registry', method: 'POST' },
+        { path: '/api/upload/ossSign', method: 'GET' },
+        { path: '/api/auth/github', method: 'GET' },
+        { path: '/api/auth/github/callback', method: 'GET' },
+        { path: '/api/client/*path', method: 'ALL' }
+      ]

@@ -1,0 +1,40 @@
+/* Hero animations ported from Vue -> React */
+
+@keyframes bear-run {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -1600px 0;
+  }
+}
+
+@keyframes bear-box-run {
+  from {
+    left: -200px;
+  }
+  to {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes bg-move {
+  from {
+    left: 0;
+  }
+  to {
+    left: -3840px;
+  }
+}
+
+@keyframes meteor-fall {
+  0% {
+    opacity: 1;
+    transform: rotate(45deg) translateX(200px) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(45deg) translateX(0px) translateY(200px);
+  }
+}

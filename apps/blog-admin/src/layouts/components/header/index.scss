@@ -1,0 +1,17 @@
+.layout-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.layout-header-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.layout-header-user {
+  color: #fff;
+  cursor: pointer;
+}

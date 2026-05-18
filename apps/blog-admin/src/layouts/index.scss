@@ -1,0 +1,22 @@
+.app-layout {
+  min-height: 100vh;
+}
+
+.app-layout-inner {
+}
+
+.app-layout-sider {
+  width: 220px;
+}
+
+.app-layout-content-wrapper {
+  padding: 0 24px 24px;
+}
+
+.app-layout-content {
+  padding: 24px;
+  margin: 0;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+}

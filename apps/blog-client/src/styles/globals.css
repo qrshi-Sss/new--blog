@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+@import './variables.css';
+@import './theme.css';
+@import './animate.css';
+
+/* @theme 直接输出最终的css变量 */
+@theme {
+}
+
+/* 基础层v3 */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html,
+  body {
+    width: 100vw;
+    height: 100vh;
+    /* min-width: 430px; */
+  }
+  a {
+    text-decoration: none;
+  }
+  ul,
+  li {
+    list-style: none;
+  }
+}
+
+/* 组件层v3 */
+@layer components {
+}
+
+/* 工具层v3 */
+@layer utilities {
+}
+
+/* v4直接写css就行，因为tailwindcss v4 会智能识别处理，但也提供了@utility */
+
+/* 工具层v4 */
+@utility font-comic {
+  font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 4px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #bbb;
+}

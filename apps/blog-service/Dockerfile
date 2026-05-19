@@ -7,17 +7,12 @@ WORKDIR /app
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo 'Asia/Shanghai' >/etc/timezone
 
-# 直接复制已构建的产物
-COPY dist ./dist
-COPY package*.json ./
+# 复制构建的产物
+COPY apps/blog-service/dist ./dist
+COPY apps/blog-service/package*.json ./
 
 # --prod 只安装生产环境依赖
 RUN npm install -g pnpm && pnpm install --prod
 
-EXPOSE 8888
-CMD ["npm", "run", "start"]
-
-
-
-
-
+EXPOSE 3333
+CMD ["npm", "run", "start", "--", "--port", "3333"]

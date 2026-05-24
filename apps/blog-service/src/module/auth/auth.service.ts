@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import * as bcrypt from 'bcryptjs'
+import * as bcrypt from 'bcrypt'
 import { RedisService } from 'src/db/redis/redis.service'
 import { JwtService } from '@nestjs/jwt'
 import { UserService } from 'src/module/user/user.service'
@@ -57,7 +57,7 @@ export class AuthService {
   async login(loginUserDto: LoginUserDto) {
     const user = await this.userService.findUserByPhone(loginUserDto.phone)
     if (user) {
-      if (!user.password || !bcrypt.compareSync(loginUserDto.password, user.password))
+      if (!bcrypt.compareSync(loginUserDto.password, user.password))
         return ResultData.fail(500, '密码错误')
 
       // 生成uuid

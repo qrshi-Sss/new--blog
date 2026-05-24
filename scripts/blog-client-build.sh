@@ -1,18 +1,15 @@
 #!/bin/bash
 
-APP_NAME=""
-APP_VERSION=""
-TAG_NAME=""
-ACR_SERVER="crpi-k8j2sanblu4jpekl.cn-hangzhou.personal.cr.aliyuncs.com"
-ACR_NAMESPACE="sqr-blog"
-
+$APP_NAME
+$APP_VERSION
+$TAG_NAME
 
 # 获取脚本所在目录
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # 切换到项目根目录
-PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-cd "$PROJECT_ROOT"
-PACKAGE_PATH="apps/blog-client/package.json"
+cd "$(cd "$SCRIPT_DIR/.." && pwd)"
+cd apps/blog-client
+PACKAGE_PATH="package.json"
 
 # 检查是否存在package.json文件
 if [ ! -f "$PACKAGE_PATH" ]; then
@@ -26,28 +23,23 @@ fi
 echo "应用名称: $APP_NAME"
 echo "应用版本: $APP_VERSION"
 
-timestamp=$(date +%Y%m%d%H%M%S)
-TAG_NAME="$ACR_SERVER/$ACR_NAMESPACE/$APP_NAME:$APP_VERSION-${timestamp}"
-echo "TAG_NAME: $TAG_NAME"
-
+# 打包应用
 pnpm --filter blog-client run build:prod
 
-# 构建Docker镜像（多阶段构建，构建过程在Docker内完成）
+timestamp=`date +%Y%m%d%H%M%S`
+TAG_NAME="$APP_NAME:$APP_VERSION-${timestamp}"
+echo "TAG_NAME: $TAG_NAME"
+
+# 构建Docker镜像
 echo "当前目录: $(pwd)"
 echo "开始构建Docker镜像: $TAG_NAME"
 
 # --progress=plain 显示构建进度 --no-cache 不使用缓存
-docker build -f apps/blog-client/Dockerfile -t $TAG_NAME .
+docker build --progress=plain --no-cache -f Dockerfile -t $TAG_NAME .
 if [ $? -ne 0 ]; then
     echo "Docker镜像构建失败"
     exit 1
 else
     echo "Docker镜像构建完成: $TAG_NAME"
 fi
-
-# 推送镜像到ACR
-docker push $TAG_NAME
-
-# 删除本地镜像
-docker rmi $TAG_NAME
 

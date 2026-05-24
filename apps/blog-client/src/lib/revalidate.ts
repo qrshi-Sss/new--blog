@@ -1,5 +1,5 @@
-const REVALIDATE_SECRET = process.env.REVALIDATE_SECRET
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL
+const REVALIDATE_SECRET = process.env.REVALIDATE_SECRET || ''
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
 interface RevalidateOptions {
   type: 'category' | 'doc' | 'home'

@@ -33,10 +33,7 @@ const Login: React.FC = () => {
         <Form
           form={form}
           onFinish={handleLogin}
-          initialValues={{
-            phone: import.meta.env.VITE_ENV === 'prod' ? '' : '16607227030',
-            password: import.meta.env.VITE_ENV === 'prod' ? '' : '123456qwer',
-          }}
+          initialValues={{ phone: '16607227030', password: '123456qwer' }}
           size="large"
         >
           <Form.Item

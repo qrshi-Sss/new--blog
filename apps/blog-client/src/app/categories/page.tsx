@@ -1,35 +1,17 @@
-'use client'
-
 import Link from 'next/link'
 import { FolderOpen, ChevronRight } from 'lucide-react'
 import { docsApi, type CategoryItemType } from '@/lib/api'
-import { useEffect, useState } from 'react'
 
-export default function CategoriesPage() {
-  const [categories, setCategories] = useState<CategoryItemType[]>([])
-  const [loading, setLoading] = useState(true)
+export const revalidate = false
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const { data } = await docsApi.getCategoryList()
-        setCategories(data || [])
-      } catch (error) {
-        console.error('获取分类列表失败:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
+export default async function CategoriesPage() {
+  let categories: CategoryItemType[] = []
 
-    fetchCategories()
-  }, [])
-
-  if (loading) {
-    return (
-      <div className="container mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-        <div className="text-center">加载中...</div>
-      </div>
-    )
+  try {
+    const { data } = await docsApi.getCategoryList()
+    categories = data || []
+  } catch (error) {
+    console.error('获取分类列表失败:', error)
   }
 
   return (
@@ -62,7 +44,7 @@ export default function CategoriesPage() {
           ))}
       </div>
 
-      {categories.length === 0 && !loading && (
+      {categories.length === 0 && (
         <div className="py-16 text-center">
           <FolderOpen className="mx-auto mb-4 h-16 w-16 text-muted-foreground/50" />
           <h3 className="mb-2 text-xl font-semibold text-foreground">暂无分类</h3>

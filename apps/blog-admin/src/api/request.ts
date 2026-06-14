@@ -2,7 +2,7 @@ import axios from 'axios'
 import { message, Modal } from 'antd'
 
 const request = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_SERVER_URL + import.meta.env.VITE_API_BASE_URL,
   timeout: 10000,
 })
 

@@ -6,6 +6,11 @@ import globals from 'globals'
 import eslintPluginPrettier from 'eslint-plugin-prettier'
 // 关闭与 Prettier 冲突的 ESLint 规则，避免重复或相互抵触
 import eslintConfigPrettier from 'eslint-config-prettier'
+// 获取当前文件所在目录（兼容低版本 Node.js）
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default [
   {
@@ -18,10 +23,12 @@ export default [
     files: ['**/*.ts', '**/*.js'],
     languageOptions: {
       parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: __dirname,
         // 最新语法支持版本
         ecmaVersion: 'latest',
         // 使用 ES Module 解析方式
-        sourceType: 'module'
+        sourceType: 'module',
       },
       // 指定运行环境的全局变量集合为 Node
       globals: globals.node

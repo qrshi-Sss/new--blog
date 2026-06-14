@@ -6,7 +6,6 @@ import { DocEntity, PublishStatus } from './entities/doc.entity'
 import { CreateCategoryDto, UpdateCategoryDto, SortCategoryDto } from './dto/category.dto'
 import { CreateDocDto, UpdateDocDto } from './dto/doc.dto'
 import { ResultData } from '@/common/utils/result'
-import { WebhookService } from '@/module/webhook/webhook.service'
 
 @Injectable()
 export class ContentService {
@@ -14,8 +13,7 @@ export class ContentService {
     @InjectRepository(CategoryEntity)
     private readonly categoryRepo: Repository<CategoryEntity>,
     @InjectRepository(DocEntity)
-    private readonly docRepo: Repository<DocEntity>,
-    private readonly webhookService: WebhookService
+    private readonly docRepo: Repository<DocEntity>
   ) {}
 
   // ========== Category ==========
@@ -45,8 +43,6 @@ export class ContentService {
     })
     await this.categoryRepo.save(category)
 
-    await this.webhookService.revalidateCategory(category.id)
-
     return ResultData.success(200, '创建成功', category)
   }
 
@@ -65,8 +61,6 @@ export class ContentService {
     category.description = dto.description || (null as any)
     await this.categoryRepo.save(category)
 
-    // await this.webhookService.revalidateCategory(id)
-
     return ResultData.success(200, '更新成功', category)
   }
 
@@ -76,8 +70,6 @@ export class ContentService {
       return ResultData.fail(404, '分类不存在')
     }
     await this.categoryRepo.remove(category)
-
-    await this.webhookService.revalidateCategory(id)
 
     return ResultData.success(200, '删除成功')
   }
@@ -132,8 +124,6 @@ export class ContentService {
 
     await this.categoryRepo.increment({ id: dto.categoryId }, 'docCount', 1)
 
-    await this.webhookService.revalidateDoc(doc.id)
-
     return ResultData.success(200, '创建成功', doc)
   }
 
@@ -155,8 +145,6 @@ export class ContentService {
     await this.docRepo.update(id, dto as any)
     const updated = await this.docRepo.findOne({ where: { id }, relations: ['category'] })
 
-    await this.webhookService.revalidateDoc(id)
-
     return ResultData.success(200, '更新成功', updated)
   }
 
@@ -169,8 +157,6 @@ export class ContentService {
     await this.docRepo.remove(doc)
 
     await this.categoryRepo.decrement({ id: doc.categoryId }, 'docCount', 1)
-
-    await this.webhookService.revalidateDoc(id)
 
     return ResultData.success(200, '删除成功')
   }

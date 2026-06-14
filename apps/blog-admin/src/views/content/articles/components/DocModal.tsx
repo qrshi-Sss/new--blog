@@ -1,6 +1,6 @@
 import { useState, useImperativeHandle, forwardRef, useRef, useEffect } from 'react'
 import { Modal, Form, Input, Select, message } from 'antd'
-import MDEditor from '@uiw/react-md-editor'
+import TiptapEditor from '@/components/TiptapEditor'
 import { createDoc, updateDoc } from '@/api/module/content'
 import type { DocItem, CategoryItem } from '@/api/module/content/type'
 import { PublishedStatus } from '@/enums/content'
@@ -147,11 +147,10 @@ const DocModal = forwardRef<DocModalRef, DocModalProps>(
               },
             ]}
           >
-            <MDEditor
+            <TiptapEditor
               value={mdContent}
-              onChange={(val) => setMdContent(val || '')}
-              height={400}
-              textareaProps={{ placeholder: '请输入文档内容（Markdown格式）' }}
+              onChange={setMdContent}
+              placeholder="请输入文档内容"
             />
           </Form.Item>
           <Form.Item name="status" label="状态" rules={[{ required: true, message: '请选择状态' }]}>

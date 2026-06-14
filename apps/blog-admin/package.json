@@ -1,7 +1,7 @@
 {
   "name": "blog-admin",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --mode=dev",
@@ -16,14 +16,22 @@
     "@ant-design/icons": "^5.5.1",
     "@ant-design/plots": "^2.3.2",
     "@ant-design/pro-components": "^2.8.10",
-    "@uiw/react-md-editor": "^4.1.0",
+    "@tiptap/extension-code-block-lowlight": "^3.26.0",
+    "@tiptap/extension-image": "^3.26.0",
+    "@tiptap/extension-link": "^3.26.0",
+    "@tiptap/extension-placeholder": "^3.26.0",
+    "@tiptap/extension-underline": "^3.26.0",
+    "@tiptap/react": "^3.26.0",
+    "@tiptap/starter-kit": "^3.26.0",
     "ali-oss": "^6.22.0",
     "antd": "^5.29.2",
     "axios": "^1.8.4",
+    "lowlight": "^3.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
     "sortablejs": "^1.15.7",
+    "tiptap-markdown": "^0.9.0",
     "zustand": "^5.0.2"
   },
   "devDependencies": {

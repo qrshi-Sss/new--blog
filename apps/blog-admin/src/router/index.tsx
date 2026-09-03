@@ -9,6 +9,7 @@ const Layout = lazy(() => import('../layouts/index'))
 
 const checkAuth = () => {
   const token = sessionStorage.getItem('token')
+  // 可额外做一些权限校验
   if (!token) {
     return redirect('/login')
   }
